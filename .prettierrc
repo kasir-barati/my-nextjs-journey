@@ -1,20 +1,28 @@
 {
-    "printWidth": 70,
-    "tabWidth": 4,
+    "arrowParens": "always",
     "useTabs": false,
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "printWidth": 70,
+    "quoteProps": "consistent",
+    "tabWidth": 4,
+    "trailingComma": "all",
     "semi": true,
     "singleQuote": true,
-    "quoteProps": "consistent",
-    "trailingComma": "all",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "endOfLine": "lf",
     "overrides": [
+        {
+            "files": ["*.yml", "*.yaml"],
+            "options": {
+                "singleQuote": false,
+                "tabWidth": 2
+            }
+        },
         {
             "files": "*.md",
             "options": {
                 "tabWidth": 2
             }
         }
-    ]
+    ],
+    "plugins": ["prettier-plugin-tailwindcss"]
 }
