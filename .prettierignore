@@ -3,6 +3,7 @@
 # Angular app specific
 .angular
 
+.next
 /dist/
 /bazel-out
 /integration/bazel/bazel-*
