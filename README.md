@@ -1,3 +1,6 @@
-# Instructions to generate this app:
+# Start app
 
-- `my-next my-nextjs-journey --typescript --use-pnpm`
+```cmd
+pnpm i --frozen-lockfile
+pnpm dev
+```
