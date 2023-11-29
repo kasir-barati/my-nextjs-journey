@@ -1,14 +1,14 @@
 import { render } from '@testing-library/react';
 import { Router } from 'next/router';
 import Sinon from 'sinon';
-import MyApp from './_app';
+import MyPage from './page';
 
-describe('MyApp', () => {
+describe('MyPage', () => {
     it('should shows app', () => {
         const routerStub = Sinon.createStubInstance(Router);
 
         const screen = render(
-            <MyApp
+            <MyPage
                 Component={Foo}
                 router={routerStub}
                 pageProps={{ title: 'Hello' }}
