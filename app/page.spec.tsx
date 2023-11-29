@@ -1,24 +1,10 @@
 import { render } from '@testing-library/react';
-import { Router } from 'next/router';
-import Sinon from 'sinon';
-import MyPage from './page';
+import Home from './page';
 
-describe('MyPage', () => {
-    it('should shows app', () => {
-        const routerStub = Sinon.createStubInstance(Router);
+describe('MyApp', () => {
+    it('should show app', () => {
+        const screen = render(<Home />);
 
-        const screen = render(
-            <MyPage
-                Component={Foo}
-                router={routerStub}
-                pageProps={{ title: 'Hello' }}
-            />,
-        );
-
-        expect(screen.queryByText('Hello')).toBeInTheDocument();
+        expect(screen.queryByText('Hi')).toBeInTheDocument();
     });
 });
-
-function Foo({ title }: { title: string }) {
-    return <p>{title}</p>;
-}

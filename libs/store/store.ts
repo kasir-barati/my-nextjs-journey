@@ -2,6 +2,8 @@ import {
     ConfigureStoreOptions,
     configureStore,
 } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { applicationReducer } from '../components/application/application.state';
 
 export function createStore(
     preloadedState?: ConfigureStoreOptions['preloadedState'],
@@ -9,7 +11,7 @@ export function createStore(
     return configureStore({
         reducer: {
             // [backendApi.reducerPath]: backendApi.reducer,
-            // auth: authReducer,
+            application: applicationReducer,
         },
         middleware(getDefaultMiddleware) {
             return getDefaultMiddleware();
@@ -19,3 +21,6 @@ export function createStore(
     });
 }
 export const store = createStore();
+export type RootState = ReturnType<typeof store.getState>;
+export const useTypedSelector: TypedUseSelectorHook<RootState> =
+    useSelector;
