@@ -1,3 +1,5 @@
+'use client';
+
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
