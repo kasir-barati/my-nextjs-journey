@@ -2,7 +2,11 @@ import {
     ConfigureStoreOptions,
     configureStore,
 } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import {
+    TypedUseSelectorHook,
+    useDispatch,
+    useSelector,
+} from 'react-redux';
 import { applicationReducer } from '../components/application/application.state';
 
 export function createStore(
@@ -21,6 +25,8 @@ export function createStore(
     });
 }
 export const store = createStore();
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useTypedSelector: TypedUseSelectorHook<RootState> =
     useSelector;

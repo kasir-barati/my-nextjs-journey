@@ -4,21 +4,25 @@ import {
     darkMode,
     lightMode,
 } from '../libs/components/application/application.state';
-import { useTypedSelector } from '../libs/store/store';
+import {
+    useAppDispatch,
+    useTypedSelector,
+} from '../libs/store/store';
 
 export default function Home() {
     const darkTheme = useTypedSelector(
         (state) => state.application.darkMode,
     );
+    const dispatch = useAppDispatch();
     function onClickHandler() {
-        !darkTheme ? darkMode() : lightMode();
+        !darkTheme ? dispatch(darkMode()) : dispatch(lightMode());
     }
 
     return (
         <main
             style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: 'block',
+                textAlign: 'center',
                 margin: 13,
                 fontSize: 70,
             }}

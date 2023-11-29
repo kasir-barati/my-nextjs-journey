@@ -1,13 +1,13 @@
 'use client';
 
-import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 interface ApplicationProps extends PropsWithChildren {
-    store: ToolkitStore;
+    // store: ToolkitStore;
 }
 
-export function Application({ children, store }: ApplicationProps) {
+export function Application({ children }: ApplicationProps) {
     return <Provider store={store}>{children}</Provider>;
 }
