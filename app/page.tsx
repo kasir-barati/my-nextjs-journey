@@ -1,21 +1,31 @@
 'use client';
 
-import { Application } from '../libs/components/application/application';
-import { store } from '../libs/store/store';
+import {
+    darkMode,
+    lightMode,
+} from '../libs/components/application/application.state';
+import { useTypedSelector } from '../libs/store/store';
 
-export default function MyPage() {
+export default function Home() {
+    const darkTheme = useTypedSelector(
+        (state) => state.application.darkMode,
+    );
+    function onClickHandler() {
+        !darkTheme ? darkMode() : lightMode();
+    }
+
     return (
-        <Application store={store}>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    margin: 13,
-                    fontSize: 70,
-                }}
-            >
-                HI
-            </div>
-        </Application>
+        <main
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                margin: 13,
+                fontSize: 70,
+            }}
+        >
+            Hi
+            <br />
+            <button onClick={onClickHandler}>Change theme</button>
+        </main>
     );
 }
