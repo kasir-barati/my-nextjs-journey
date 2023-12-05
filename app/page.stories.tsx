@@ -5,6 +5,9 @@ import Home from './page';
 export default {
     parameters: {
         layout: 'centered',
+        nextjs: {
+            appDirectory: true,
+        },
     },
     component: Home,
 } satisfies Meta<typeof Home>;
