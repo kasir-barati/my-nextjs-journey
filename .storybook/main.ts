@@ -9,7 +9,6 @@ export default {
         '../libs/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     ],
     addons: [
-        '@storybook/jest',
         '@storybook/addon-a11y',
         '@storybook/addon-links',
         '@storybook/addon-essentials',
