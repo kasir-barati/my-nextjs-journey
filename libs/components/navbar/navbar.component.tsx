@@ -13,11 +13,13 @@ export interface NavbarProps {
 export function Navbar({ navbars }: Readonly<NavbarProps>) {
     return (
         <div>
-            {navbars.map(({ title, name, path }) => (
+            {navbars.map(({ title, name, path }, index) => (
                 <span key={`${path}${name}`}>
                     <Link href={path} title={title ?? name}>
                         {name}
                     </Link>
+                    &nbsp;
+                    {index !== navbars.length - 1 && '|'}
                     &nbsp;
                 </span>
             ))}
