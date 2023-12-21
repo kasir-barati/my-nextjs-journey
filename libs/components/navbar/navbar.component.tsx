@@ -14,16 +14,12 @@ export function Navbar({ navbars }: Readonly<NavbarProps>) {
     return (
         <div>
             {navbars.map(({ title, name, path }) => (
-                <>
-                    <Link
-                        key={`${path}${name}`}
-                        href={path}
-                        title={title ?? name}
-                    >
+                <span key={`${path}${name}`}>
+                    <Link href={path} title={title ?? name}>
                         {name}
                     </Link>
                     &nbsp;
-                </>
+                </span>
             ))}
         </div>
     );
