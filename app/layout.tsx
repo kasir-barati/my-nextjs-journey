@@ -33,6 +33,11 @@ export default function RootLayout({
             name: 'Contact us',
             path: '/contact',
         },
+        {
+            title: 'Team members',
+            name: 'Team',
+            path: '/team',
+        },
     ];
 
     return (
