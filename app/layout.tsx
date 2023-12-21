@@ -19,14 +19,19 @@ export default function RootLayout({
 }: Readonly<PropsWithChildren>) {
     const navbars: NavbarProps['navbars'] = [
         {
+            title: 'Index page',
+            name: 'Index',
+            path: '/',
+        },
+        {
             title: 'About us page',
             name: 'About',
             path: '/about',
         },
         {
-            title: 'Index page',
-            name: 'Index',
-            path: '/',
+            title: 'Contact us page',
+            name: 'Contact us',
+            path: '/contact',
         },
     ];
 
