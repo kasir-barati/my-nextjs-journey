@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { PropsWithChildren } from 'react';
 import { Application } from '../libs/components/application/application';
+import { NavbarProps } from '../libs/components/navbar/navbar.component';
 import '../styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -12,13 +14,36 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-}: {
-    children: React.ReactNode;
-}) {
+}: Readonly<PropsWithChildren>) {
+    const navbarItems: NavbarProps['navbars'] = [
+        {
+            title: 'Index page',
+            name: 'Index',
+            path: '/',
+        },
+        {
+            title: 'About us page',
+            name: 'About',
+            path: '/about',
+        },
+        {
+            title: 'Contact us page',
+            name: 'Contact us',
+            path: '/contact',
+        },
+        {
+            title: 'Team members',
+            name: 'Team',
+            path: '/team',
+        },
+    ];
+
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Application>{children}</Application>
+                <Application navbarItems={navbarItems}>
+                    {children}
+                </Application>
             </body>
         </html>
     );

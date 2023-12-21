@@ -1,15 +1,18 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import {
     darkMode,
     lightMode,
 } from '../libs/components/application/application.state';
+import { Button } from '../libs/components/button/button.component';
 import {
     useAppDispatch,
     useTypedSelector,
 } from '../libs/store/store';
 
 export default function Home() {
+    const router = useRouter();
     const darkTheme = useTypedSelector(
         (state) => state.application.darkMode,
     );
@@ -17,18 +20,15 @@ export default function Home() {
     function onClickHandler() {
         !darkTheme ? dispatch(darkMode()) : dispatch(lightMode());
     }
+    function handleClick() {
+        router.back();
+    }
 
     return (
-        <main
-            style={{
-                display: 'block',
-                textAlign: 'center',
-                margin: 13,
-                fontSize: 70,
-            }}
-        >
-            Hi
+        <main>
+            <h1>Hi</h1>
             <br />
+            <Button onClick={handleClick}>Go back</Button>
             <button onClick={onClickHandler}>Change theme</button>
         </main>
     );

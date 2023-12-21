@@ -1,4 +1,4 @@
-# how to run app
+# Start app
 
 ```cmd
 pnpm i --frozen-lockfile
