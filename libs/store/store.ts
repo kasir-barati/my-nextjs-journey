@@ -7,12 +7,15 @@ import {
     useDispatch,
     useSelector,
 } from 'react-redux';
-import { applicationReducer } from '../components/application/application.state';
+import {
+    ApplicationState,
+    applicationReducer,
+} from '../components/application/application.state';
 
 export function createStore(
     preloadedState?: ConfigureStoreOptions['preloadedState'],
 ) {
-    return configureStore({
+    return configureStore<{ application: ApplicationState }>({
         reducer: {
             // [backendApi.reducerPath]: backendApi.reducer,
             application: applicationReducer,

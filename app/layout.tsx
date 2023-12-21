@@ -36,6 +36,16 @@ export default function RootLayout({
             name: 'Team',
             path: '/team',
         },
+        {
+            title: 'Terms and conditions page',
+            name: 'Terms and conditions',
+            path: '/terms-and-conditions',
+        },
+        {
+            title: 'Resume page',
+            name: 'Resume',
+            path: '/resume',
+        },
     ];
 
     return (

@@ -29,6 +29,7 @@ export default function Home() {
             <h1>Hi</h1>
             <br />
             <Button onClick={handleClick}>Go back</Button>
+            &nbsp;
             <button onClick={onClickHandler}>Change theme</button>
         </main>
     );
