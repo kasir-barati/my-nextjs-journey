@@ -1,11 +1,14 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { PropsWithChildren, useEffect } from 'react';
 import { useAppDispatch, useTypedSelector } from '../../store/store';
 import {
-    userLeftOurWebsite,
-    userWasInWebsite,
+    userLeftOurApp,
+    userWasInOurApp,
+    userWasNotInOurApp,
 } from '../application/application.state';
+import { UserCameFromAnotherSite } from './user-came-from-another-site.enum';
 
 export function UserCameFromAnotherSiteSetter({
     children,
@@ -14,14 +17,24 @@ export function UserCameFromAnotherSiteSetter({
         (state) => state.application.userCameFromAnotherSite,
     );
     const dispatch = useAppDispatch();
+    const pathname = usePathname();
 
     useEffect(() => {
-        if (document.referrer) {
-            dispatch(userWasInWebsite());
+        if (
+            userCameFromAnotherSite.state ===
+                UserCameFromAnotherSite.InitialState &&
+            !userCameFromAnotherSite.currentPathname
+        ) {
+            dispatch(userWasNotInOurApp());
+        } else if (
+            userCameFromAnotherSite.state ===
+            UserCameFromAnotherSite.UserWasNotInOurApp
+        ) {
+            dispatch(userWasInOurApp({ currentPathname: pathname }));
         }
 
         return () => {
-            dispatch(userLeftOurWebsite());
+            dispatch(userLeftOurApp());
         };
     }, [userCameFromAnotherSite]);
 

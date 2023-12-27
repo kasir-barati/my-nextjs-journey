@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { UserCameFromAnotherSite } from '../user-came-from-another-site-setter/user-came-from-another-site.enum';
 
 export interface ApplicationState {
     darkMode: boolean;
-    userCameFromAnotherSite: boolean;
+    userCameFromAnotherSite: {
+        state: UserCameFromAnotherSite;
+        currentPathname: string;
+    };
 }
 
 const applicationSlice = createSlice<
@@ -10,8 +14,12 @@ const applicationSlice = createSlice<
     {
         darkMode(state: ApplicationState): void;
         lightMode(state: ApplicationState): void;
-        userWasInWebsite(state: ApplicationState): void;
-        userLeftOurWebsite(state: ApplicationState): void;
+        userWasInOurApp(
+            state: ApplicationState,
+            action: { payload: { currentPathname: string } },
+        ): void;
+        userWasNotInOurApp(state: ApplicationState): void;
+        userLeftOurApp(state: ApplicationState): void;
     },
     'application',
     any
@@ -19,7 +27,10 @@ const applicationSlice = createSlice<
     name: 'application',
     initialState: {
         darkMode: false,
-        userCameFromAnotherSite: false,
+        userCameFromAnotherSite: {
+            state: UserCameFromAnotherSite.InitialState,
+            currentPathname: '',
+        },
     },
     reducers: {
         darkMode(state) {
@@ -28,11 +39,23 @@ const applicationSlice = createSlice<
         lightMode(state) {
             state.darkMode = false;
         },
-        userWasInWebsite(state) {
-            state.userCameFromAnotherSite = true;
+        userWasInOurApp(state, { payload: { currentPathname } }) {
+            state.userCameFromAnotherSite = {
+                state: UserCameFromAnotherSite.UserWasInOurApp,
+                currentPathname,
+            };
         },
-        userLeftOurWebsite(state) {
-            state.userCameFromAnotherSite = false;
+        userWasNotInOurApp(state) {
+            state.userCameFromAnotherSite = {
+                state: UserCameFromAnotherSite.UserWasNotInOurApp,
+                currentPathname: '',
+            };
+        },
+        userLeftOurApp(state) {
+            state.userCameFromAnotherSite = {
+                state: UserCameFromAnotherSite.InitialState,
+                currentPathname: '',
+            };
         },
     },
 });
@@ -40,7 +63,8 @@ const applicationSlice = createSlice<
 export const {
     darkMode,
     lightMode,
-    userWasInWebsite,
-    userLeftOurWebsite,
+    userWasInOurApp,
+    userWasNotInOurApp,
+    userLeftOurApp,
 } = applicationSlice.actions;
 export const applicationReducer = applicationSlice.reducer;

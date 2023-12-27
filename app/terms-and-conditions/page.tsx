@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Button } from '../../libs/components/button/button.component';
+import { shouldWeRedirectUserToIndex } from '../../libs/components/user-came-from-another-site-setter/should-we-redirect-user-to-index.util';
 import { useTypedSelector } from '../../libs/store/store';
 
 export default function TermsAndConditions() {
@@ -10,7 +11,7 @@ export default function TermsAndConditions() {
         (state) => state.application.userCameFromAnotherSite,
     );
     function handleClick() {
-        if (userCameFromAnotherSite) {
+        if (shouldWeRedirectUserToIndex(userCameFromAnotherSite)) {
             router.push('/');
             return;
         }
