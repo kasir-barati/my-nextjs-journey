@@ -2,8 +2,11 @@
     "name": "my-nextjs-journey",
     "version": "0.1.0",
     "private": true,
+    "engines": {
+        "node": ">19"
+    },
     "scripts": {
-        "dev": "next dev --turbo",
+        "dev": "clear && next dev --turbo",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
@@ -33,7 +36,7 @@
         "@storybook/test": "^7.6.6",
         "@storybook/testing-library": "^0.2.2",
         "@storybook/types": "^7.6.6",
-        "@testing-library/jest-dom": "^6.1.5",
+        "@testing-library/jest-dom": "^6.1.6",
         "@testing-library/react": "^14.1.2",
         "@types/jest": "^29.5.11",
         "@types/node": "^20.10.5",

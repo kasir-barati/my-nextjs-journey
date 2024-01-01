@@ -7,19 +7,19 @@ interface Navbar {
 }
 
 export interface NavbarProps {
-    navbars: Navbar[];
+    items: Navbar[];
 }
 
-export function Navbar({ navbars }: Readonly<NavbarProps>) {
+export function Navbar({ items }: Readonly<NavbarProps>) {
     return (
         <div>
-            {navbars.map(({ title, name, path }, index) => (
+            {items.map(({ title, name, path }, index) => (
                 <span key={`${path}${name}`}>
                     <Link href={path} title={title ?? name}>
                         {name}
                     </Link>
                     &nbsp;
-                    {index !== navbars.length - 1 && '|'}
+                    {index !== items.length - 1 && '|'}
                     &nbsp;
                 </span>
             ))}

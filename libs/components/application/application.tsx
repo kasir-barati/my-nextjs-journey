@@ -4,9 +4,10 @@ import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import { Navbar, NavbarProps } from '../navbar/navbar.component';
+import { PathnamesProvider } from '../pathnames/pathnames.provider';
 
 interface ApplicationProps {
-    navbarItems: NavbarProps['navbars'];
+    navbarItems: NavbarProps['items'];
     // store: ToolkitStore;
 }
 
@@ -16,10 +17,10 @@ export function Application({
 }: Readonly<PropsWithChildren<ApplicationProps>>) {
     return (
         <Provider store={store}>
-            {/* <UserCameFromAnotherSiteSetter> */}
-            <Navbar navbars={navbarItems} />
-            {children}
-            {/* </UserCameFromAnotherSiteSetter> */}
+            <PathnamesProvider>
+                <Navbar items={navbarItems} />
+                {children}
+            </PathnamesProvider>
         </Provider>
     );
 }

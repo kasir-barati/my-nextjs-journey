@@ -2,21 +2,20 @@
 
 import { useRouter } from 'next/navigation';
 import { Button } from '../../libs/components/button/button.component';
-import { shouldWeRedirectUserToIndex } from '../../libs/components/user-came-from-another-site-setter/should-we-redirect-user-to-index.util';
-import { useTypedSelector } from '../../libs/store/store';
+import { shouldWeRedirectUserToIndex } from '../../libs/components/pathnames/should-we-redirect-user-to-index.util';
+import { usePathnames } from '../../libs/components/pathnames/use-pathnames.hook';
 
 export default function Resume() {
     const router = useRouter();
-    const userCameFromAnotherSite = useTypedSelector(
-        (state) => state.application.userCameFromAnotherSite,
-    );
-    function handleClick() {
-        if (shouldWeRedirectUserToIndex(userCameFromAnotherSite)) {
+    const { getPathnames } = usePathnames();
+    const pathnames = getPathnames();
+    const handleClick = () => {
+        if (shouldWeRedirectUserToIndex(pathnames)) {
             router.push('/');
-            return;
+        } else {
+            router.push(pathnames[pathnames.length - 2]);
         }
-        router.back();
-    }
+    };
 
     return (
         <main>
