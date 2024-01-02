@@ -1,35 +1,19 @@
-import React from 'react';
-// README: Does not matter really, both works the same
-// import { act } from 'react-dom/test-utils';
-import { act, render } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 import { useUpdateEffect } from './use-update-effect.hook';
 
 describe('useUpdateEffect', () => {
-    it('should call cleanup callback on unmount not rerender', () => {
-        let expectedState: number;
-        const TestComponent = ({
-            dummyProps,
-        }: {
-            dummyProps: number;
-        }) => {
-            const [state, setState] = React.useState(0);
-            expectedState = state;
+    it('should not call the callback on the first render, but should on subsequent renders', () => {
+        let fakeDependency = 1;
+        const effectCallback = jest.fn();
 
-            useUpdateEffect(() => {
-                setState(state + 1);
-            }, [state]);
-
-            return <div>Hello {dummyProps}</div>;
-        };
-        const { unmount, rerender } = render(
-            <TestComponent dummyProps={1} />,
+        const { rerender } = renderHook(() =>
+            useUpdateEffect(effectCallback, [fakeDependency]),
         );
 
-        expect(expectedState!).toBe(0);
-        act(() => rerender(<TestComponent dummyProps={2} />));
-        expect(expectedState!).toBe(1);
-        act(() => unmount());
-        act(() => render(<TestComponent dummyProps={3} />));
-        expect(expectedState!).toBe(0);
+        // The first render skips the callback.
+        expect(effectCallback).not.toHaveBeenCalled();
+        // The second render invokes the callback.
+        act(() => fakeDependency++ && rerender());
+        expect(effectCallback).toHaveBeenCalledTimes(1);
     });
 });
