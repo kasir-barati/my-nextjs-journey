@@ -30,7 +30,9 @@ export default function Home() {
             <br />
             <Button onClick={handleClick}>Go back</Button>
             &nbsp;
-            <button onClick={onClickHandler}>Change theme</button>
+            <button onClick={onClickHandler}>
+                {darkTheme ? 'dark' : 'light'} theme
+            </button>
         </main>
     );
 }
